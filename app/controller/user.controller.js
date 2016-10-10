@@ -6,7 +6,6 @@ var userModel = mongoose.model('User');
 
 function getTodos(req, res) {
 
-
     ToDoModel.find({}, function (err, documents) {
         if (err) {
             res.send(err);
@@ -32,9 +31,21 @@ function registerUser(req, res) {
 function deleteUser(req,res) {
     userModel.findByIdAndRemove('57f4a930ef1e77164c33844c')
         .then(function (doc) {
-            console.log("________________removed", doc)
+
         }).catch(function (err) {
-            console.log("_____________error occurred")
+
+    });
+
+}
+
+function findUser(req,res) {
+
+    userModel.findOne({name:'chawla'})
+        .then(function (doc) {
+            res.send( doc);
+
+        }).catch(function (err) {
+          console.log(err);
     });
 
 }
@@ -43,5 +54,7 @@ function deleteUser(req,res) {
 module.exports = {
     getTodos: getTodos,
     registerUser: registerUser,
-    deleteUser:deleteUser
+    deleteUser:deleteUser,
+    findUser:findUser
+    
 };

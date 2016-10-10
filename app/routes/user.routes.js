@@ -1,17 +1,24 @@
 var userController = require('../controller/user.controller');
+var passport = require('passport');
 
 
 function userRoutes(app) {
-   
+
     app.post('/api/user/signUp', userController.registerUser);
+    app.post('/api/login/user', passport.authenticate('local',
+        {failureRedirect: '/'}), function (req, res) {
+        res.redirect('/api/todos');
+    });
     app.delete('/api/delete/user', userController.deleteUser);
+    app.get('/api/findUser', userController.findUser)
+
 }
 
 function todoRoutes(app) {
     app.get('/api/todos', function (req, res) {
         userController.getTodos(req, res);
     });
-    
+
     app.post('/api/todos', function (req, res) {
         var todoModel = mongoose.model('ToDo');
         todoModel.create({
