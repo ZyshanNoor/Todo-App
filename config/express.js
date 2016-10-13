@@ -19,13 +19,15 @@ module.exports = function (mongoose) {
     app.use(methodOverride());
     app.use(passport.initialize());
     app.use(passport.session());
+    app.set('views','./app/views');
+    app.set('view engine', 'ejs');
 
-
+        
     require('../app/routes/user.routes.js')(app);
 
     app.get('/', function (req, res, next) {
         // res.send('Welcome to the server root');
-        res.send({user: req.user});
+        res.render('index');
 
 
     });

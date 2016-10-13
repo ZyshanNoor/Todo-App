@@ -10,6 +10,6 @@ app.listen(3000);
 winston.log('info', chalk.green('Application started at port 3000'));
 module.exports = app;
 
-
+console.log(db);
 
 
